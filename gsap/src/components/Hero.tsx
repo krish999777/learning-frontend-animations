@@ -131,6 +131,9 @@ export default function Hero() {
       ease: 'power2.inOut',
     }, '-=0.15');
 
+    // Pause the growth when the ad reaches the size of the game frame (phone/device screen)
+    scrollTl.to({}, { duration: 0.3 });
+
     // STAGE 2: Grow the gameFrame itself to full viewport screen size
     scrollTl.to(gameFrameRef.current, {
       width: '100vw',
