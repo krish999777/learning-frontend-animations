@@ -52,7 +52,7 @@ export default function Hero() {
       scrollTrigger: {
         trigger: containerRef.current,
         start: 'top top',
-        end: '+=280%',
+        end: '+=450%',
         scrub: 1,
         pin: true,
         onUpdate: (self) => {
@@ -80,43 +80,43 @@ export default function Hero() {
     scrollTl.to(textContentRef.current, {
       opacity: 0,
       y: -100,
-      duration: 0.2,
+      duration: 0.15,
       ease: 'power2.inOut',
     });
 
     scrollTl.to('.game-ui-left', {
       x: -350,
       opacity: 0,
-      duration: 0.25,
+      duration: 0.15,
       ease: 'power2.inOut',
-    }, '-=0.15');
+    }, '-=0.1');
 
     scrollTl.to('.game-ui-right', {
       x: 350,
       opacity: 0,
-      duration: 0.25,
+      duration: 0.15,
       ease: 'power2.inOut',
-    }, '-=0.25');
+    }, '-=0.15');
 
     scrollTl.to('.game-ui-top', {
       y: -180,
       opacity: 0,
-      duration: 0.25,
+      duration: 0.15,
       ease: 'power2.inOut',
-    }, '-=0.25');
+    }, '-=0.15');
 
     scrollTl.to('.game-ui-bottom', {
       y: 180,
       opacity: 0,
-      duration: 0.25,
+      duration: 0.15,
       ease: 'power2.inOut',
-    }, '-=0.25');
+    }, '-=0.15');
 
     scrollTl.to('.ad-tag, .crosshair', {
       opacity: 0,
-      duration: 0.15,
+      duration: 0.1,
       ease: 'power2.out',
-    }, '-=0.25');
+    }, '-=0.15');
 
     // Ad slot video expands to cover the internal gameFrame area
     scrollTl.to(adContainerRef.current, {
@@ -127,9 +127,9 @@ export default function Hero() {
       borderRadius: '16px',
       borderWidth: '0px',
       boxShadow: 'none',
-      duration: 0.3,
+      duration: 0.15,
       ease: 'power2.inOut',
-    }, '-=0.25');
+    }, '-=0.15');
 
     // STAGE 2: Grow the gameFrame itself to full viewport screen size
     scrollTl.to(gameFrameRef.current, {
@@ -141,19 +141,19 @@ export default function Hero() {
       bottom: '0px',
       borderRadius: '0px',
       borderWidth: '0px',
-      duration: 0.35,
+      duration: 0.2,
       ease: 'power2.inOut',
     });
 
     // Animate ad container border radius to 0px in sync with the game frame
     scrollTl.to(adContainerRef.current, {
       borderRadius: '0px',
-      duration: 0.35,
+      duration: 0.2,
       ease: 'power2.inOut',
     }, '<');
 
     // STAGE 3: Hold the full screen state for scroll cushion
-    scrollTl.to({}, { duration: 1.5 });
+    scrollTl.to({}, { duration: 2.5 });
 
   }, { scope: containerRef });
 
@@ -234,66 +234,45 @@ export default function Hero() {
               loop
             />
             {/* High-tech Timeline Overlay on the right */}
-            <div style={styles.videoTimelineTrack}></div>
             <div style={styles.videoLabels}>
               {/* IN-GAME */}
               <div style={{
                 ...styles.videoLabelItem,
-                color: activePhase === 'in-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.4)',
-                transform: activePhase === 'in-game' ? 'translateX(-clamp(4px, 0.6cqw, 10px))' : 'translateX(0)',
+                color: activePhase === 'in-game' ? '#ffffff' : 'rgba(255, 255, 255, 0.4)',
+                transform: activePhase === 'in-game' ? 'translateX(calc(-1 * clamp(6px, 1cqw, 16px))) scale(1.08)' : 'translateX(0) scale(1)',
+                textShadow: activePhase === 'in-game' ? '0 0 12px rgba(255, 255, 255, 0.5)' : 'none',
               }}>
                 <span style={{ fontWeight: activePhase === 'in-game' ? 700 : 500 }}>IN-GAME</span>
-                <div style={{
-                  ...styles.videoLabelDot,
-                  backgroundColor: activePhase === 'in-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.1)',
-                  borderColor: activePhase === 'in-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.3)',
-                  boxShadow: activePhase === 'in-game' ? '0 0 8px var(--accent-color)' : 'none',
-                }} />
               </div>
 
               {/* ON-GAME */}
               <div style={{
                 ...styles.videoLabelItem,
-                color: activePhase === 'on-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.4)',
-                transform: activePhase === 'on-game' ? 'translateX(-clamp(4px, 0.6cqw, 10px))' : 'translateX(0)',
+                color: activePhase === 'on-game' ? '#ffffff' : 'rgba(255, 255, 255, 0.4)',
+                transform: activePhase === 'on-game' ? 'translateX(calc(-1 * clamp(6px, 1cqw, 16px))) scale(1.08)' : 'translateX(0) scale(1)',
+                textShadow: activePhase === 'on-game' ? '0 0 12px rgba(255, 255, 255, 0.5)' : 'none',
               }}>
                 <span style={{ fontWeight: activePhase === 'on-game' ? 700 : 500 }}>ON-GAME</span>
-                <div style={{
-                  ...styles.videoLabelDot,
-                  backgroundColor: activePhase === 'on-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.1)',
-                  borderColor: activePhase === 'on-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.3)',
-                  boxShadow: activePhase === 'on-game' ? '0 0 8px var(--accent-color)' : 'none',
-                }} />
               </div>
 
               {/* OFF-GAME */}
               <div style={{
                 ...styles.videoLabelItem,
-                color: activePhase === 'off-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.4)',
-                transform: activePhase === 'off-game' ? 'translateX(-clamp(4px, 0.6cqw, 10px))' : 'translateX(0)',
+                color: activePhase === 'off-game' ? '#ffffff' : 'rgba(255, 255, 255, 0.4)',
+                transform: activePhase === 'off-game' ? 'translateX(calc(-1 * clamp(6px, 1cqw, 16px))) scale(1.08)' : 'translateX(0) scale(1)',
+                textShadow: activePhase === 'off-game' ? '0 0 12px rgba(255, 255, 255, 0.5)' : 'none',
               }}>
                 <span style={{ fontWeight: activePhase === 'off-game' ? 700 : 500 }}>OFF-GAME</span>
-                <div style={{
-                  ...styles.videoLabelDot,
-                  backgroundColor: activePhase === 'off-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.1)',
-                  borderColor: activePhase === 'off-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.3)',
-                  boxShadow: activePhase === 'off-game' ? '0 0 8px var(--accent-color)' : 'none',
-                }} />
               </div>
 
               {/* PRO-GAME */}
               <div style={{
                 ...styles.videoLabelItem,
-                color: activePhase === 'pro-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.4)',
-                transform: activePhase === 'pro-game' ? 'translateX(-clamp(4px, 0.6cqw, 10px))' : 'translateX(0)',
+                color: activePhase === 'pro-game' ? '#ffffff' : 'rgba(255, 255, 255, 0.4)',
+                transform: activePhase === 'pro-game' ? 'translateX(calc(-1 * clamp(6px, 1cqw, 16px))) scale(1.08)' : 'translateX(0) scale(1)',
+                textShadow: activePhase === 'pro-game' ? '0 0 12px rgba(255, 255, 255, 0.5)' : 'none',
               }}>
                 <span style={{ fontWeight: activePhase === 'pro-game' ? 700 : 500 }}>PRO-GAME</span>
-                <div style={{
-                  ...styles.videoLabelDot,
-                  backgroundColor: activePhase === 'pro-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.1)',
-                  borderColor: activePhase === 'pro-game' ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.3)',
-                  boxShadow: activePhase === 'pro-game' ? '0 0 8px var(--accent-color)' : 'none',
-                }} />
               </div>
             </div>
 
@@ -375,41 +354,23 @@ const styles = {
     gap: 'clamp(8px, 1.5vh, 16px)',
     justifyContent: 'center',
   },
-  videoTimelineTrack: {
-    position: 'absolute' as const,
-    right: 'clamp(15px, 3.5cqw, 67px)',
-    top: 'calc(50% - clamp(30px, 7cqw, 100px))',
-    width: 'clamp(1px, 0.15cqw, 3px)',
-    height: 'clamp(60px, 14cqw, 200px)',
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    zIndex: 9,
-    pointerEvents: 'none' as const,
-  },
   videoLabels: {
     position: 'absolute' as const,
-    right: 'clamp(12px, 3cqw, 60px)',
+    right: 'clamp(20px, 4.5cqw, 80px)',
     top: '50%',
     transform: 'translateY(-50%)',
     display: 'flex',
     flexDirection: 'column' as const,
-    gap: 'clamp(8px, 2cqw, 32px)',
+    gap: 'clamp(16px, 4.5cqw, 64px)',
     zIndex: 10,
     pointerEvents: 'none' as const,
   },
   videoLabelItem: {
     display: 'flex',
     alignItems: 'center',
-    gap: 'clamp(6px, 1cqw, 16px)',
     fontFamily: 'var(--font-display)',
-    fontSize: 'clamp(10px, 1.6cqw, 24px)',
+    fontSize: 'clamp(24px, 4.5cqw, 64px)',
     letterSpacing: '0.05em',
-    transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
-  },
-  videoLabelDot: {
-    width: 'clamp(6px, 1cqw, 14px)',
-    height: 'clamp(6px, 1cqw, 14px)',
-    borderRadius: '50%',
-    border: '1px solid',
     transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
   },
   adContainer: {
