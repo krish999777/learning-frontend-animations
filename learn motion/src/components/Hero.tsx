@@ -37,19 +37,70 @@ export default function Hero() {
     return () => clearInterval(interval)
   }, [])
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  }
+
+  const badgeVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: 'easeOut' as const
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: 'easeOut' as const
+      }
+    }
+  }
+
+  const mockupVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] as const
+      }
+    }
+  }
+
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-grid-pattern">
       {/* Glow backgrounds */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-white/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-20 left-1/3 w-[300px] h-[300px] bg-zinc-800/10 rounded-full blur-[100px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center text-center"
+      >
         {/* Badge */}
         <motion.a
           href="#features"
-          initial={{ opacity: 0, y:-10  }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration:0.5, ease:'easeIn'}}
+          variants={badgeVariants}
+          whileHover={{ scale: 1.05 }}
           className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-white/5 text-xs font-medium text-zinc-300 hover:border-white/20 transition-all duration-300 mb-8"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
@@ -59,9 +110,7 @@ export default function Hero() {
 
         {/* Heading */}
         <motion.h1
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+          variants={itemVariants}
           className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white max-w-4xl leading-[1.1]"
         >
           Build software workflows <br />
@@ -72,9 +121,7 @@ export default function Hero() {
 
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+          variants={itemVariants}
           className="mt-6 text-lg md:text-xl text-zinc-400 max-w-2xl leading-relaxed"
         >
           Aether is the visual automation and operations center built for developer teams. 
@@ -83,9 +130,7 @@ export default function Hero() {
 
         {/* CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+          variants={itemVariants}
           className="mt-10 flex flex-col sm:flex-row items-center gap-4"
         >
           <a
@@ -106,9 +151,7 @@ export default function Hero() {
 
         {/* Product UI Mockup */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          variants={mockupVariants}
           className="mt-20 w-full max-w-5xl rounded-2xl glass-panel glass-panel-glow overflow-hidden relative"
         >
           {/* Header Bar */}
@@ -207,7 +250,7 @@ export default function Hero() {
             </div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }
